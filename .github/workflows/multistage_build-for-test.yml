@@ -6,8 +6,6 @@
 #
 name: Stage 
  on:
-  pull_request:
-     branches: [ main ]
   workflow_dispatch:
     inputs:
       releaseType:
