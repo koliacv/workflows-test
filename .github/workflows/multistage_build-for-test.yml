@@ -15,7 +15,7 @@ on:
   
 jobs: 
   staging:
-    steps:
+    step:
     - name: Checkout latest version 
       uses: appleboy/scp-action@master
       with:
@@ -27,7 +27,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo systemctl restart nginx
-    steps: 
+    step: 
     - name: Check webpage 
       run : python .github/workflows/check-usebility.py
 
