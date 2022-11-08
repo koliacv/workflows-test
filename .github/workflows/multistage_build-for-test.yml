@@ -5,7 +5,7 @@
 #push to prod on server to port  80
 #
 name: Stage 
- on:
+on:
   workflow_dispatch:
     inputs:
       releaseType:
