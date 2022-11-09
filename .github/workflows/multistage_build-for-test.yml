@@ -17,8 +17,9 @@ jobs:
   staging:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@main
       - name: Checkout latest version 
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        uses: Sappleboy/scp-action@master
         with:
           local: sitefile
           remote: /test
