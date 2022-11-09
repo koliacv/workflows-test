@@ -33,10 +33,11 @@ jobs:
         run : python .github/workflows/check-usebility.py
 
   prod:
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@main
       - name: Checkout latest version 
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        uses: Sappleboy/scp-action@master
         with:
           local: sitefile
           remote: /prod
@@ -46,5 +47,5 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             sudo systemctl restart nginx
-      - name: Check webpage 
-        run : python .github/workflows/.devops/check-usebility.py
+      - name: Check webpaae 
+        run : python .github/workflows/check-usebility.py
