@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout latest version 
-        uses: appleboy/scp-action@master
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           local: sitefile
           remote: /test
@@ -28,14 +28,14 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             sudo systemctl restart nginx
-      - name: Check webpage 
+      - name: Check webpaae 
         run : python .github/workflows/check-usebility.py
 
   prod:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout latest version 
-        uses: appleboy/scp-action@master
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           local: sitefile
           remote: /prod
