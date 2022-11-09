@@ -15,39 +15,43 @@ on:
   
 jobs: 
   staging:
+    name: Build staging on server
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 
       - uses: actions/checkout@v2
       - name: Copy file via ssh password
-      uses: ./
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.SSH_PORT }}
-        source: "sitefile"
-        target: "/test"
-        script: |
-          sudo systemctl restart nginx
-      - name: Check webpaae 
+      - uses: ./
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "sitefile"
+          target: "/test"
+          script: |
+            sudo systemctl restart nginx
+      - name: Check webpage 
         run : python .github/workflows/check-usebility.py
 
   prod:
     runs-on: ubuntu-latest
     steps:
+       name: Build prod on server
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout 
       - uses: actions/checkout@v2
       - name: Copy file via ssh password
-      uses: ./
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.SSH_PORT }}
-        source: "sitefile"
-        target: "/prod"
-        script: |
-          sudo systemctl restart nginx
-      - name: Check webpaae 
+      - uses: ./
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "sitefile"
+          target: "/prod"
+          script: |
+            sudo systemctl restart nginx
+      - name: Check webpage 
         run : python .github/workflows/check-usebility.py
