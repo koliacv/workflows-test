@@ -33,7 +33,7 @@ jobs:
         run : python .github/workflows/check-usebility.py
 
   prod:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
       - name: Checkout latest version 
