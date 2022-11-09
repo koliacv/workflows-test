@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Checkout latest version 
-        uses: Sappleboy/scp-action@master
+        uses: Sappleboy/scp-action@main
         with:
           local: sitefile
           remote: /test
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Checkout latest version 
-        uses: Sappleboy/scp-action@master
+        uses: Sappleboy/scp-action@main
         with:
           local: sitefile
           remote: /prod
