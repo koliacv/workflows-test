@@ -4,7 +4,7 @@
 #choose what environment we need 
 #push to prod on server to port  80
 #
-name: Stage 
+name: Deploy
 on:
   workflow_dispatch:
     inputs:
