@@ -21,15 +21,8 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v1
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PASSWORD }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "sitefile/"
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: /test
-          EXCLUDE: "sitefile/"
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh ${{ secrets.SSH_USER }}@${{ secrets.HOST }}
+        run: ls -alh
       - name: Check webpage 
         run : python .github/workflows/check-usebility.py
 
@@ -40,14 +33,6 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v1
       - name: Deploy to PROD Server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PASSWORD }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "sitefile/"
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER}}
-          TARGET: /prod
-          EXCLUDE: "sitefile/"
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh ${{ secrets.SSH_USER }}@${{ secrets.HOST }}
       - name: Check webpage 
         run : python .github/workflows/check-usebility.py
