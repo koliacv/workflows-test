@@ -34,9 +34,9 @@ jobs:
         run : python .github/workflows/check-usebility.py
 
   prod:
+    name: Build prod on server
+    runs-on: ubuntu-latest
     steps:
-      name: Build prod on server
-      runs-on: ubuntu-latest
       - name: Checkout 
       - uses: actions/checkout@v1
       - name: Deploy to PROD Server
