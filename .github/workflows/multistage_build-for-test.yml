@@ -21,8 +21,9 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v1
       - name: Deploy to Server
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh ${{ secrets.SSH_USER }}@${{ secrets.HOST }}
-        run: ls -alh
+        run: |
+         sshpass -p ${{ secrets.SSH_PASSWORD }} ssh ${{ secrets.SSH_USER }}@${{ secrets.HOST }}
+         ls -alh
       - name: Check webpage 
         run : python .github/workflows/check-usebility.py
 
