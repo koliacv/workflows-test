@@ -23,11 +23,11 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PASSWORD }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "sitefile/"
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
           TARGET: /test
           EXCLUDE: "sitefile/"
       - name: Check webpage 
@@ -42,11 +42,11 @@ jobs:
       - name: Deploy to PROD Server
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PASSWORD }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "sitefile/"
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_USER: ${{ secrets.SSH_USER}}
           TARGET: /prod
           EXCLUDE: "sitefile/"
       - name: Check webpage 
