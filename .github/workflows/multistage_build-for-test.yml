@@ -19,39 +19,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 
-      - uses: actions/checkout@v2
-      - name: Copy file via ssh password
-      - uses: ./
-      - with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "sitefile"
-          target: "/test"
-          script: |
-            sudo systemctl restart nginx
+      - uses: actions/checkout@v1
+      - name: Deploy to Server
+          uses: easingthemes/ssh-deploy@main
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            ARGS: "-rltgoDzvO --delete"
+            SOURCE: "sitefile/"
+            REMOTE_HOST: ${{ secrets.HOST }}
+            REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+            TARGET: /test
+            EXCLUDE: "sitefile/"
       - name: Check webpage 
         run : python .github/workflows/check-usebility.py
 
   prod:
-    runs-on: ubuntu-latest
     steps:
-       name: Build prod on server
-    runs-on: ubuntu-latest
-    steps:
+      name: Build prod on server
+      runs-on: ubuntu-latest
       - name: Checkout 
-      - uses: actions/checkout@v2
-      - name: Copy file via ssh password
-      - uses: ./
-      - with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "sitefile"
-          target: "/prod"
-          script: |
-            sudo systemctl restart nginx
+      - uses: actions/checkout@v1
+      - name: Deploy to PROD Server
+          uses: easingthemes/ssh-deploy@main
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            ARGS: "-rltgoDzvO --delete"
+            SOURCE: "sitefile/"
+            REMOTE_HOST: ${{ secrets.HOST }}
+            REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+            TARGET: /prod
+            EXCLUDE: "sitefile/"
       - name: Check webpage 
         run : python .github/workflows/check-usebility.py
